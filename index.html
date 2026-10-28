@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Contra - Kubo Touch</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #121212; color: #fff; font-family: Arial, sans-serif; overflow: hidden; }
+        * { box-sizing: border-box; }
+        body, html { margin: 0; padding: 0; width: 100%; min-height: 100%; background-color: #121212; color: #fff; font-family: Arial, sans-serif; }
         header { text-align: center; padding: 15px; background: #1e1e1e; }
         .badge { background: #e74c3c; color: #fff; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; }
         #game-card { max-width: 500px; margin: 20px auto; background: #1e1e1e; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
@@ -13,7 +14,7 @@
         .cover-container { 
             width: 100%; 
             height: 250px; 
-            background-image: url('Contra.png');
+            background-image: url('Contra.png');[cite: 10]
             background-size: contain; 
             background-repeat: no-repeat; 
             background-position: center; 
@@ -30,19 +31,18 @@
         .btn-play { 
             display: block; 
             width: 100%; 
-            padding: 14px; 
+            padding: 16px; 
             background: #e74c3c; 
             color: #fff; 
             border: none; 
-            border-radius: 6px; 
+            border-radius: 8px; 
             font-weight: bold; 
-            font-size: 16px; 
+            font-size: 18px; 
             cursor: pointer; 
             text-align: center; 
-            text-decoration: none;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            position: relative;
+            z-index: 10;
         }
         .btn-play:active { background: #c0392b; }
 
@@ -51,9 +51,9 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw; 
-            height: 100vh; 
-            z-index: 9999;
+            width: 100%; 
+            height: 100%; 
+            z-index: 99999;
             background: #000;
         }
         #game { width: 100%; height: 100%; }
@@ -86,7 +86,7 @@
                 </ul>
             </div>
 
-            <button type="button" class="btn-play" onclick="startEmulator()">JOGAR AGORA</button>
+            <button id="play-btn" class="btn-play">JOGAR AGORA</button>
         </div>
     </div>
 
@@ -95,35 +95,30 @@
     </div>
 
     <script type="text/javascript">
-        function startEmulator() {
-            // Oculta o cabeçalho e o card
+        document.getElementById('play-btn').addEventListener('click', function() {
+            // Oculta o card e cabeçalho
             document.getElementById('header-bar').style.display = 'none';
             document.getElementById('game-card').style.display = 'none';
             
-            // Exibe o container em tela cheia
-            var gameContainer = document.getElementById('game-container');
-            gameContainer.style.display = 'block';
+            // Mostra o container em tela cheia
+            var container = document.getElementById('game-container');
+            container.style.display = 'block';
 
-            // Configurações do EmulatorJS
+            // Configuração do EmulatorJS
             window.EJS_player = '#game';
             window.EJS_core = 'snes9x';
             window.EJS_gameName = 'Contra';
             window.EJS_color = '#e74c3c';
             window.EJS_startOnLoaded = true;
             window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
-            
-            // URL codificada para evitar problemas com espaço no nome do arquivo
-            window.EJS_gameUrl = 'Contra%20SNES.sfc';[cite: 10]
+            window.EJS_gameUrl = 'Contra SNES.sfc';[cite: 10]
 
-            // Carrega o script do emulador dinamicamente
+            // Injeta o script de carregamento do emulador
             var script = document.createElement('script');
             script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
             script.async = true;
-            script.onerror = function() {
-                alert('Erro ao carregar o emulador. Verifique a sua conexão com a internet.');
-            };
             document.body.appendChild(script);
-        }
+        });
     </script>
 </body>
 </html>
