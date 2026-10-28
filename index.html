@@ -5,63 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Contra - Kubo Touch</title>
     <style>
-        * { box-sizing: border-box; }
-        body, html { margin: 0; padding: 0; width: 100%; min-height: 100%; background-color: #121212; color: #fff; font-family: Arial, sans-serif; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #121212; color: #fff; font-family: Arial, sans-serif; }
         header { text-align: center; padding: 15px; background: #1e1e1e; }
         .badge { background: #e74c3c; color: #fff; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; }
         #game-card { max-width: 500px; margin: 20px auto; background: #1e1e1e; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        
-        .cover-container { 
-            width: 100%; 
-            height: 250px; 
-            background-image: url('Contra.png');[cite: 10]
-            background-size: contain; 
-            background-repeat: no-repeat; 
-            background-position: center; 
-            background-color: #0d0d0d; 
-        }
-
+        .cover-container { width: 100%; height: 250px; background-image: url('Contra.png'); background-size: cover; background-position: center; }
         .content { padding: 20px; }
         h1 { margin: 0 0 10px 0; font-size: 24px; color: #e74c3c; }
         .meta-info { display: flex; gap: 10px; margin-bottom: 15px; font-size: 13px; color: #aaa; }
         .description { font-size: 14px; line-height: 1.5; color: #ddd; margin-bottom: 15px; }
         .details { font-size: 13px; color: #bbb; margin-bottom: 20px; }
         .details ul { padding-left: 20px; margin: 0; }
-        
-        .btn-play { 
-            display: block; 
-            width: 100%; 
-            padding: 16px; 
-            background: #e74c3c; 
-            color: #fff; 
-            border: none; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            font-size: 18px; 
-            cursor: pointer; 
-            text-align: center; 
-            outline: none;
-            position: relative;
-            z-index: 10;
-        }
-        .btn-play:active { background: #c0392b; }
-
-        #game-container { 
-            display: none; 
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%; 
-            height: 100%; 
-            z-index: 99999;
-            background: #000;
-        }
+        .btn-play { display: block; width: 100%; padding: 12px; background: #c0392b; color: #fff; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; text-align: center; text-decoration: none; }
+        .btn-play:hover { background: #a93226; }
+        #game-container { display: none; width: 100%; height: 100vh; }
         #game { width: 100%; height: 100%; }
     </style>
 </head>
 <body>
 
-    <header id="header-bar">
+    <header>
         <span class="badge">KUBO TOUCH</span>
     </header>
 
@@ -77,16 +40,16 @@
             </div>
 
             <p class="description">
-                Prepare seus refletores e armas! Assuma o papel dos comandos Bill Rizer e Lance Bean em uma missão implacável para deter uma organização terrorista alienígena controlada pela entidade Red Falcon.
+                Prepare-se para muita ação e tiro em estilo clássico! Enfrente exércitos inimigos e alienígenas nas selvas implacáveis de Contra.
             </p>
 
             <div class="details">
                 <ul>
-                    <li><strong>🕹️ Gênero:</strong> Run and Gun / Ação</li>
+                    <li><strong>🕹️ Gênero:</strong> Ação / Run and Gun</li>
                 </ul>
             </div>
 
-            <button id="play-btn" class="btn-play">JOGAR AGORA</button>
+            <button class="btn-play" onclick="startEmulator()">JOGAR AGORA</button>
         </div>
     </div>
 
@@ -95,30 +58,24 @@
     </div>
 
     <script type="text/javascript">
-        document.getElementById('play-btn').addEventListener('click', function() {
-            // Oculta o card e cabeçalho
-            document.getElementById('header-bar').style.display = 'none';
+        function startEmulator() {
             document.getElementById('game-card').style.display = 'none';
-            
-            // Mostra o container em tela cheia
-            var container = document.getElementById('game-container');
-            container.style.display = 'block';
+            document.getElementById('game-container').style.display = 'block';
 
-            // Configuração do EmulatorJS
             window.EJS_player = '#game';
             window.EJS_core = 'snes9x';
             window.EJS_gameName = 'Contra';
             window.EJS_color = '#e74c3c';
             window.EJS_startOnLoaded = true;
             window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
-            window.EJS_gameUrl = 'Contra SNES.sfc';[cite: 10]
+            
+            // Link ajustado para o repositório Contra e o arquivo Contra SNES.sfc[cite: 4]
+            window.EJS_gameUrl = 'https://raw.githubusercontent.com/grupoplanejar2024-coder/Contra/main/Contra%20SNES.sfc';
 
-            // Injeta o script de carregamento do emulador
             var script = document.createElement('script');
             script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
-            script.async = true;
             document.body.appendChild(script);
-        });
+        }
     </script>
 </body>
 </html>
