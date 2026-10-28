@@ -14,7 +14,7 @@
         .cover-container { 
             width: 100%; 
             height: 250px; 
-            background-image: url('Contra.jpg');
+            background-image: url('Contra.png');
             background-size: contain; 
             background-repeat: no-repeat; 
             background-position: center; 
@@ -51,7 +51,7 @@
             </div>
 
             <p class="description">
-                Prepare seus refletores e armas! Assuma o papel dos comandos Bill Rizer e Lance Bean em uma missão implacable para deter uma organização terrorista alienígena controlada pela entidade Red Falcon.
+                Prepare seus refletores e armas! Assuma o papel dos comandos Bill Rizer e Lance Bean em uma missão implacável para deter uma organização terrorista alienígena controlada pela entidade Red Falcon.
             </p>
 
             <div class="details">
@@ -70,20 +70,17 @@
 
     <script type="text/javascript">
         function startEmulator() {
-            // Esconde o card e mostra o container do jogo ocupando a tela toda
             document.getElementById('game-card').style.display = 'none';
             document.getElementById('game-container').style.display = 'block';
 
-            // Configurações do EmulatorJS (Alterar o core se for versão de NES ou SNES conforme sua ROM)
             window.EJS_player = '#game';
-            window.EJS_core = 'snes9x'; // Altere para 'nes' caso esteja usando a versão de NES
+            window.EJS_core = 'snes9x';
             window.EJS_gameName = 'Contra';
             window.EJS_color = '#e74c3c';
             window.EJS_startOnLoaded = true;
             window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
-            window.EJS_gameUrl = 'contra.smc'; // Altere para o nome exato do arquivo da ROM no seu repositório
+            window.EJS_gameUrl = 'Contra SNES.sfc';[cite: 10]
 
-            // Injeta o loader do EmulatorJS com tratamento de erro
             var script = document.createElement('script');
             script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
             script.async = true;
